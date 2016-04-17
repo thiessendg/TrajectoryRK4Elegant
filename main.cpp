@@ -26,11 +26,11 @@
 
 using namespace std;
 
-constexpr double g = -9.80665; // gravity, the vertical acceleration (m/s/s)
-constexpr double re = 6371000.0; // mean Radius of Earth in meters
-constexpr double a = 0.0; // horizontal acceleration
-constexpr double pi = 3.14159265358979323846; // don't rely on M_PI
-constexpr double deg2rad = pi / 180.0;
+const double g = -9.80665; // gravity, the vertical acceleration (m/s/s)
+const double re = 6371000.0; // mean Radius of Earth in meters
+const double a = 0.0; // horizontal acceleration
+const double pi = 3.14159265358979323846; // don't rely on M_PI
+const double deg2rad = pi / 180.0;
 
 struct State
 {   //state consists of p and p'
