@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/TrajectoryRK4/.vs/TrajectoryRK4Elegant/v15
+/TrajectoryRK4/Debug
+/TrajectoryRK4/Release
+/TrajectoryRK4/TrajectoryRK4/Debug
+/TrajectoryRK4/TrajectoryRK4/Release
+/TrajectoryRK4/TrajectoryRK4/x64
+/TrajectoryRK4/x64

@@ -5,19 +5,19 @@
  *      Author: david thiessen <thiessendg@gmail.com>
  */
 
-/*     Adapted from an example by Glenn Fielder
- *     Simple RK4 integration framework
- *     Copyright (c) 2004, Glenn Fiedler
- *     http://www.gaffer.org/articles
- *
- *     common abbreviations (can be combined):
- *         vert - vertical
- *         horz - horizontal
- *         vel - velocity
- *         acc - acceleration
- *         pos - position
- *         init - initial
- */
+ /*     Adapted from an example by Glenn Fielder
+  *     Simple RK4 integration framework
+  *     Copyright (c) 2004, Glenn Fiedler
+  *     http://www.gaffer.org/articles
+  *
+  *     common abbreviations (can be combined):
+  *         vert - vertical
+  *         horz - horizontal
+  *         vel - velocity
+  *         acc - acceleration
+  *         pos - position
+  *         init - initial
+  */
 
 #include <cmath>
 #include <iostream>
@@ -57,75 +57,75 @@ void rk4(State &, const double);
 
 int main(int argc, char * argv[])
 {
-    double initAlt;
+	double initAlt;
 	double initVel;
 	double firingAngle;
 	double deltaTime;
 	double finalTime;
 
 	if (argc != 6)
-    {
+	{
 		//we didn't get command line args, so prompt for them
 		cout << "Command line arguments error or not provided." << endl;
 
 		cout << "Enter initial altitude/elevation: " << endl;
-        cin >> initAlt;
-        while (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(); //skip bad input
-            cout << "Error - Invalid input." << endl;
-            cout << "Enter initial altitude/elevation: " << endl;
-            cin >> initAlt;
-        }
+		cin >> initAlt;
+		while (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(); //skip bad input
+			cout << "Error - Invalid input." << endl;
+			cout << "Enter initial altitude/elevation: " << endl;
+			cin >> initAlt;
+		}
 
-        cout << "Enter firing angle in degrees (0-90): " << endl;
+		cout << "Enter firing angle in degrees (0-90): " << endl;
 		cin >> firingAngle;
-        while (cin.fail() || firingAngle < 0.0 || firingAngle > 90.0)
-        {
-            cin.clear();
-            cin.ignore(); //skip bad input
-            cout << "Error - Invalid input." << endl;
-            cout << "Enter firing angle in degrees (0-90): " << endl;
-            cin >> firingAngle;
-        }
+		while (cin.fail() || firingAngle < 0.0 || firingAngle > 90.0)
+		{
+			cin.clear();
+			cin.ignore(); //skip bad input
+			cout << "Error - Invalid input." << endl;
+			cout << "Enter firing angle in degrees (0-90): " << endl;
+			cin >> firingAngle;
+		}
 
 		cout << "Enter initial velocity (m/s): " << endl;
 		cin >> initVel;
-        while (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(); //skip bad input
-            cout << "Error - Invalid input." << endl;
-            cout << "Enter initial velocity (m/s): " << endl;
-            cin >> initVel;
-        }
+		while (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(); //skip bad input
+			cout << "Error - Invalid input." << endl;
+			cout << "Enter initial velocity (m/s): " << endl;
+			cin >> initVel;
+		}
 
 		cout << "Enter the time step (s) per integration: " << endl;
 		cin >> deltaTime;
-        while (cin.fail() || deltaTime < 0.)
-        {
-            cin.clear();
-            cin.ignore(); //skip bad input
-            cout << "Error - Invalid input." << endl;
-            cout << "Enter the time step (s) per integration: " << endl;
-            cin >> deltaTime;
-        }
+		while (cin.fail() || deltaTime < 0.)
+		{
+			cin.clear();
+			cin.ignore(); //skip bad input
+			cout << "Error - Invalid input." << endl;
+			cout << "Enter the time step (s) per integration: " << endl;
+			cin >> deltaTime;
+		}
 
 		cout << "Enter final time (s): " << endl;
 		cin >> finalTime;
-        while (cin.fail() || finalTime < 0.)
-        {
-            cin.clear();
-            cin.ignore(); //skip bad input
-            cout << "Error - Invalid input." << endl;
-            cout << "Enter final time (s): " << endl;
-            cin >> finalTime;
-        }
-    }
+		while (cin.fail() || finalTime < 0.)
+		{
+			cin.clear();
+			cin.ignore(); //skip bad input
+			cout << "Error - Invalid input." << endl;
+			cout << "Enter final time (s): " << endl;
+			cin >> finalTime;
+		}
+	}
 	else
-    {
-        initAlt = strtod(argv[1], NULL);
+	{
+		initAlt = strtod(argv[1], NULL);
 		initVel = strtod(argv[2], NULL);
 		firingAngle = strtod(argv[3], NULL);
 		deltaTime = strtod(argv[4], NULL);
@@ -146,16 +146,16 @@ int main(int argc, char * argv[])
 	cout << showpoint;
 
 	while (currentTime < finalTime && p.vertPos >= 0.0)
-    {
-        rk4(p, deltaTime);
+	{
+		rk4(p, deltaTime);
 
 		currentTime += deltaTime;
 
-        cout << setprecision(5);
+		cout << setprecision(5);
 		cout << "t = " << currentTime << endl;
 		cout << setprecision(9);
 		cout << "\ty = " << p.vertPos << "\ty' = " << p.vertVel << endl;
-        cout << "\tx = " << p.horzPos << "\tx' = " << p.horzVel << endl;
+		cout << "\tx = " << p.horzPos << "\tx' = " << p.horzVel << endl;
 	}
 
 	cout << "End of simulation..." << endl;
@@ -190,9 +190,9 @@ const Derivative evaluate(const State & p)
 }
 
 const Derivative evaluate(const State & initP, const double deltaTime,
-		const Derivative & pPrime)
+	const Derivative & pPrime)
 {
-    //compute an intermediate state based on initP and its derivative pPrime
+	//compute an intermediate state based on initP and its derivative pPrime
 	State p;
 	//y_n = y_i + v_yi * t;
 	p.vertPos = initP.vertPos + pPrime.vertVel * deltaTime;
@@ -215,18 +215,18 @@ void rk4(State &state, const double deltaTime)
 {
 	//integrate via 4th order runge-kutta
 	Derivative k1 = evaluate(state);
-	Derivative k2 = evaluate(state, deltaTime/2., k1);
-	Derivative k3 = evaluate(state, deltaTime/2., k2);
+	Derivative k2 = evaluate(state, deltaTime / 2., k1);
+	Derivative k3 = evaluate(state, deltaTime / 2., k2);
 	Derivative k4 = evaluate(state, deltaTime, k3);
 
 	const double deltaVertVel =
-            (k1.vertVel + 2. * (k2.vertVel + k3.vertVel) + k4.vertVel) / 6.;
+		(k1.vertVel + 2. * (k2.vertVel + k3.vertVel) + k4.vertVel) / 6.;
 	const double deltaVertAcc =
-            (k1.vertAcc + 2. * (k2.vertAcc + k3.vertAcc) + k4.vertAcc) / 6.;
+		(k1.vertAcc + 2. * (k2.vertAcc + k3.vertAcc) + k4.vertAcc) / 6.;
 	const double deltaHorzVel =
-            (k1.horzVel + 2. * (k2.horzVel + k3.horzVel) + k4.horzVel) / 6.;
+		(k1.horzVel + 2. * (k2.horzVel + k3.horzVel) + k4.horzVel) / 6.;
 	const double deltaHorzAcc =
-            (k1.horzAcc + 2. * (k2.horzAcc + k3.horzAcc) + k4.horzAcc) / 6.;
+		(k1.horzAcc + 2. * (k2.horzAcc + k3.horzAcc) + k4.horzAcc) / 6.;
 
 	//the new state
 	state.vertPos = state.vertPos + deltaVertVel * deltaTime;
